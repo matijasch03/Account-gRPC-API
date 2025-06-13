@@ -18,7 +18,7 @@ function createUser(call, callback) {
 
   call.request.id = idCounter++;
   users.push(call.request);
-  callback(null, {id: call.request.id});
+  callback(null, {user: call.request});
 }
 
 function returnErrorMessage(name, email) {

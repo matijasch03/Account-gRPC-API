@@ -7,22 +7,22 @@ service UserService {
   rpc GetUsers (GetUsersRequest) returns (GetUsersReply);
 }
 
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
 message CreateUserRequest {
   string name = 1;
   string email = 2;
 }
 
 message CreateUserReply {
-  int32 id = 1;
+  User user = 1;
 }
 
 message GetUsersRequest {}
-
-message User {
-  int32 id = 1;
-  string name = 2;
-  string email = 3;
-}
 
 message GetUsersReply {
   repeated User users = 1;

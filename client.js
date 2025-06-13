@@ -11,7 +11,7 @@ const [, , name, email] = process.argv;
 
 client.CreateUser({name, email}, (err, response) => {
   if (!err) {
-    console.log('Successfully created user with id', response.id);
+    console.log('Successfully created user', response.user.name, 'with ID', response.user.id);
   } else {
     console.error('Error:', err.message);
   }
