@@ -48,8 +48,19 @@ function getUsers (call, callback) {
   callback(null, {users});
 }
 
+function deleteUserById (call, callback) {
+  const index = users.findIndex(user => user.id === call.request.id);
+  if (index !== -1) {
+    users.splice(index, 1);
+  }
+  else {
+    return callback (null, {message: "Error: This ID doesn't exist."});
+  }
+  callback (null, {message: 'Successfully deleted user with ID ' + call.request.id.toString()});
+}
+
 const server = new grpc.Server();
-server.addService(userProto.UserService.service, { CreateUser: createUser, GetUsers: getUsers });
+server.addService(userProto.UserService.service, { CreateUser: createUser, GetUsers: getUsers, DeleteUser: deleteUserById });
 server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
   server.start();
   console.log('gRPC server started on port 50051');

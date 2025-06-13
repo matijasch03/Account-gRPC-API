@@ -5,6 +5,7 @@ package user;
 service UserService {
   rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
   rpc GetUsers (GetUsersRequest) returns (GetUsersReply);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
 }
 
 message User {
@@ -28,4 +29,12 @@ message GetUsersRequest {
 
 message GetUsersReply {
   repeated User users = 1;
+}
+
+message DeleteUserRequest {
+  int32 id = 1;
+}
+
+message DeleteUserReply {
+  string message = 1;
 }

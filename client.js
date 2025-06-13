@@ -35,10 +35,22 @@ switch (command){
     });
     break;
 
+  case 'delete':
+    const id = parseInt(process.argv[3]);
+    if (Number.isInteger(id)) {
+      client.DeleteUser({id}, (err, response) => {
+        if (!err) {
+          console.log(response.message);
+        } else {
+          console.error('Error:', err.message);
+        }
+      });
+    }
+    else {
+      console.log('Error: Not a number.');
+    }
+    break;
+
   default:
     console.log('Error: Incorrect command. Availible are: create, list and delete.');
 }
-
-
-
-
