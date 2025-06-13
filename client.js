@@ -6,21 +6,39 @@ const userProto = grpc.loadPackageDefinition(packageDefinition).user;
 
 const client = new userProto.UserService('localhost:50051', grpc.credentials.createInsecure());
 
-// these two commas reserved for the first two words 'node cliennt.js' in the command line
-const [, , name, email] = process.argv;
+const command = process.argv[2]; // create, list or delete
+switch (command){
+  case 'create':
+    // these three commas reserved for the first two words 'node cliennt.js command' in the command line
+    const [, , , name, email] = process.argv;
 
-client.CreateUser({name, email}, (err, response) => {
-  if (!err) {
-    console.log('Successfully created user', response.user.name, 'with ID', response.user.id);
-  } else {
-    console.error('Error:', err.message);
-  }
-});
+    client.CreateUser({name, email}, (err, response) => {
+      if (!err) {
+        console.log('Successfully created user', response.user.name, 'with ID', response.user.id);
+      } else {
+        console.error('Error:', err.message);
+      }
+    });
+    break;
 
-client.GetUsers({}, (err, response) => {
-  if (!err) {
-    console.log('User list:', response.users);
-  } else {
-    console.error('Error:', err.message);
-  }
-});
+  case 'list':
+    let filterText = '';
+    if (process.argv.length > 3)
+       filterText= process.argv[3];
+
+    client.GetUsers({filterText}, (err, response) => {
+      if (!err) {
+        console.log('User list:', response.users);
+      } else {
+        console.error('Error:', err.message);
+      }
+    });
+    break;
+
+  default:
+    console.log('Error: Incorrect command. Availible are: create, list and delete.');
+}
+
+
+
+

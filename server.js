@@ -23,7 +23,7 @@ function createUser(call, callback) {
 
 function returnErrorMessage(name, email) {
   if (!name || !email)
-    return 'Incorrect format error\nCorrect one: node client.js name email';
+    return 'Incorrect format error\nCorrect one: node client.js create name email';
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email))
@@ -32,7 +32,19 @@ function returnErrorMessage(name, email) {
   return '';
 }
 
-function getUsers (_, callback) {
+function getUsers (call, callback) {
+  const filterText = call.request.filterText;
+  if (filterText) {
+    let filteredUsers = [];
+
+    // filter all users whose names match the filter text
+    users.forEach((user) => {
+      if (user.name.includes(filterText))
+        filteredUsers.push(user);
+      });
+    return callback(null, {users: filteredUsers});
+  }
+
   callback(null, {users});
 }
 

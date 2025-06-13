@@ -22,7 +22,9 @@ message CreateUserReply {
   User user = 1;
 }
 
-message GetUsersRequest {}
+message GetUsersRequest {
+  string filterText = 1;
+}
 
 message GetUsersReply {
   repeated User users = 1;
