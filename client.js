@@ -8,7 +8,7 @@ const client = new userProto.User('localhost:50051', grpc.credentials.createInse
 
 client.CreateUser({ name: 'Petar', email: 'petar@gmail.com'}, (err, response) => {
   if (!err) {
-    console.log('Server message:', response.message);
+    console.log('Successfully created user with id', response.id);
   } else {
     console.error('Error:', err);
   }

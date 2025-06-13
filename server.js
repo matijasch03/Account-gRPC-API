@@ -3,15 +3,13 @@ const protoLoader = require('@grpc/proto-loader');
 
 const packageDefinition = protoLoader.loadSync('user.proto');
 const userProto = grpc.loadPackageDefinition(packageDefinition).user;
-let users = [];
+const users = [];
 let idCounter = 0;
 
 function createUser(call, callback) {
-    call.request.id = idCounter;
-    idCounter++;
+    call.request.id = idCounter++;
     users.push(call.request);
-    callback(null, { message: 'Successfully created the user ' + call.request.name + ' with id ' + call.request.id});
-    //console.log(users);
+    callback(null, {id: call.request.id});
 }
 
 const server = new grpc.Server();
