@@ -20,7 +20,7 @@ Created a `.proto` file defining:
 - `string email` – required
 
 #### RPC Methods:
-```protobuf
+```
   rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
   rpc GetUsers (GetUsersRequest) returns (GetUsersReply);
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
@@ -39,12 +39,17 @@ Created a `.proto` file defining:
 
 ## How to Run the Project
 
-```git clone https://github.com/matijasch03/Account-gRPC-API.git
-cd Account-gRPC-API```
+```
+git clone https://github.com/matijasch03/Account-gRPC-API.git
+cd Account-gRPC-API
+```
 
 You need to have installed Node.js
 
-npm or yarn installed: ```npm install```
+npm or yarn installed: 
+```
+npm install
+```
 
 If you haven't generated the gRPC stub files:
 ```
@@ -54,11 +59,17 @@ npx grpc_tools_node_protoc \
   -I ./protos ./protos/user.proto
 ```
 
-Start the gRPC server: ```node server.js```
-In the other terminal start the gRPC client: ```node client.js pera pera@gmail.com```
-```node client.js list```
-```node client.js marko marko@gmail.com```
-```node client.js list```
-```node client.js list per```
-```node client.js delete 0```
-```node client.js list```
+Start the gRPC server: 
+```
+node server.js
+```
+In the other terminal start the gRPC client: 
+```
+node client.js pera pera@gmail.com
+node client.js list
+node client.js marko marko@gmail.com
+node client.js list
+node client.js list per
+node client.js delete 0
+node client.js list
+```
