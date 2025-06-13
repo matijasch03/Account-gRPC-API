@@ -12,8 +12,12 @@ function createUser(call, callback) {
     callback(null, {id: call.request.id});
 }
 
+function getUsers (_, callback) {
+  callback(null, {users});
+}
+
 const server = new grpc.Server();
-server.addService(userProto.User.service, { CreateUser: createUser });
+server.addService(userProto.UserService.service, { CreateUser: createUser, GetUsers: getUsers });
 server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
   server.start();
   console.log('gRPC server started on port 50051');
